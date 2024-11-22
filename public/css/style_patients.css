@@ -124,6 +124,9 @@ p {
   margin-top: 20px; /* Espacement au-dessus du paragraphe */
   font-size: 1.2rem; /* Taille du texte du message */
   font-weight: bold; /* Mettre le texte en gras */
+  overflow-wrap: break-word; /* Permet de gérer les mots longs */
+  word-wrap: break-word; /* Compatibilité ancienne */
+  white-space: pre-wrap; /* Préserve les sauts de ligne tout en autorisant les retours automatiques */
 }
 #retourMenuPrincipal {
   position: relative; 
