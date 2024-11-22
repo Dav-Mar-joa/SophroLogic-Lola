@@ -1,0 +1,25 @@
+doctype html
+html(lang="fr")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="css/style_documents.css")
+    title Calendrier Hebdomadaire
+
+  body
+  
+    //- Navigation des semaines
+    div
+      form(action='/' method='get')
+        button#retourMenuPrincipal Menu d'acceuil 
+    br
+    .buttons-container
+      a.button.declarationPaiementsAnnuel(href="/declarationPaiementsAnnuel") Déclaration des paiements annuel
+      a.button.recapitulatifPaiementsAnnuel(href="/recapitulatifPaiementsAnnuel") Récapitualif des paiements annuel
+      recapitulatifPaiementsAnnuel
+
+
+    footer
+      br
+      p &copy; Sophrologic 2024. Tous droits réservés.
+      br

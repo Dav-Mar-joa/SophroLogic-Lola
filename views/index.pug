@@ -1,0 +1,35 @@
+doctype html
+html(lang="fr")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="css/style_index.css")
+    title Sophrologic
+
+  body
+    //- En-tête
+    header
+      h1 Sophrologic
+
+    //- Conteneur des boutons principaux
+    .buttons-container
+      a.button.nouveauPatient(href="/nouveauPatient") Nouveau Patient
+      a.button.patients(href="/patients") Patients
+      a.button.suivi(href="/suiviPatient") Suivi Patient
+      a.button.planning(href="/planning") Planning
+      a.button.comptabilite(href="/paiement") Paiement
+      a.button.boiteOutils(href="/documents") Documents
+    footer
+      br
+      p &copy; Sophrologic 2024. Tous droits réservés.
+      br  
+    script.
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(function(registration) {
+            console.log('Service Worker enregistré avec le scope :', registration.scope);
+          })
+          .catch(function(error) {
+            console.log('Échec de l\'enregistrement du Service Worker :', error);
+          });
+      }

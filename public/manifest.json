@@ -1,0 +1,22 @@
+{
+    "name": "Sophrologic",
+    "short_name": "Sophrologic",
+    "description": "Application mobile pour Sophrologic.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ff0000", 
+    "theme_color": "#ff0000",      
+    "icons": [
+      {
+        "src": "/assets/icons/icon192.png", 
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/assets/icons/icon512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

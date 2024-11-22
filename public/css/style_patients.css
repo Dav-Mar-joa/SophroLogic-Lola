@@ -1,0 +1,179 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f3f4f6; /* Couleur de fond douce */
+  color: #333; /* Couleur du texte */
+  text-align: center;
+}
+textarea {
+  width: 300px; /* Limite la largeur à 300 pixels */
+  max-width: 100%; /* Permet au textarea de s'adapter à l'écran tout en gardant la largeur max */
+  height: auto; /* Permet à la hauteur de s'adapter au contenu */
+  min-height: 5vh; /* Définissez une hauteur minimale si nécessaire */
+  resize: none; /* Permet de redimensionner verticalement uniquement */
+}
+
+/* Styles pour le header */
+header {
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Navigation des semaines */
+div {
+  margin-bottom: 20px; /* Espacement entre le bouton et le formulaire */
+}
+
+/* Style du formulaire */
+form {
+  background-color: #fff; /* Fond blanc pour le formulaire */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre pour le formulaire */
+  padding: 20px; /* Espacement interne du formulaire */
+  width: 500px; /* Largeur fixe du formulaire */
+  gap: 5%;
+}
+
+ul {
+  list-style-type: none; /* Supprimer les puces de la liste */
+  padding: 0; /* Supprimer le padding par défaut */
+}
+
+li {
+  margin-bottom: 15px; /* Espacement entre les éléments de la liste */
+}
+
+/* Style des étiquettes et des champs de saisie */
+label {
+  display: block; /* Étiquettes en bloc pour s'assurer qu'elles s'affichent correctement */
+  margin-bottom: 5px; /* Espacement entre l'étiquette et le champ de saisie */
+  font-weight: bold; /* Mettre les étiquettes en gras */
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%; /* Champs de saisie en pleine largeur */
+  padding: 10px; /* Espacement interne */
+  border: 1px solid #ccc; /* Bordure grise claire */
+  border-radius: 4px; /* Coins arrondis pour les champs de saisie */
+}
+.choix{
+  margin-left: 1%;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  border-color: #2196F3; /* Bordure bleue lors du focus */
+  outline: none; /* Supprimer le contour par défaut */
+}
+.form-row {
+  display: flex; 
+  align-items: center; 
+}
+.form-row-nom-valider {
+  display: flex; /* Utilise Flexbox pour aligner les éléments sur une ligne */
+  align-items: center; /* Centre verticalement les éléments */
+  gap:10%;
+}
+button[type="submit"] {
+  margin-left: 10px; /* Ajustez selon vos besoins */
+}
+.ficheRenseignements{
+  margin-bottom: 2%;
+}
+
+/* Style du bouton */
+button {
+  background-color: #2196F3; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte du bouton */
+  padding: 10px 15px; /* Espacement interne du bouton */
+  border: none; /* Supprimer la bordure par défaut */
+  border-radius: 4px; /* Coins arrondis */
+  cursor: pointer; /* Changer le curseur lors du survol */
+  font-size: 1rem; /* Taille du texte du bouton */
+  transition: background-color 0.3s; /* Transition douce pour le changement de couleur */
+}
+
+button:hover {
+  background-color: #1e88e5; /* Couleur du bouton au survol */
+}
+
+/* Style pour les messages d'information */
+p {
+  margin-top: 20px; /* Espacement au-dessus du paragraphe */
+  font-size: 1.2rem; /* Taille du texte du message */
+  font-weight: bold; /* Mettre le texte en gras */
+}
+#retourMenuPrincipal {
+  position: relative; 
+  margin: auto;      
+  margin-top: 1vh; 
+  margin-bottom: 2vh;              
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Press Start 2P';
+  background-color:rgb(81, 231, 17);
+  color: #000000;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: 3px solid #fff;
+}
+.submit{
+  margin-top: 5%;
+}
+
+/* Styles pour les écrans de 600px ou moins */
+@media (max-width: 600px) {
+  body {
+      padding: 10px; /* Ajouter un peu de padding pour éviter que le contenu soit collé aux bords */
+  }
+  .ficheRenseignements{
+    margin-bottom: 2%;
+  }
+
+  form {
+      width: 100%; /* Formulaire prend toute la largeur de l'écran */
+      padding: 15px; /* Ajuster le padding pour un espacement interne plus confortable */
+  }
+
+  button {
+      width: 100%; /* Le bouton prend toute la largeur du formulaire */
+      font-size: 1.1rem; /* Augmenter légèrement la taille de la police pour la lisibilité */
+  }
+
+  ul {
+      padding-left: 0; /* Supprimer le padding à gauche pour les listes */
+  }
+
+  li {
+      margin-bottom: 10px; /* Réduire l'espacement entre les éléments de la liste pour économiser de l'espace */
+  }
+
+  p {
+      font-size: 1rem; /* Réduire la taille de la police du message pour les petits écrans */
+  }
+}
+p.syntheseProtocole {
+  font-weight: bold; /* Met le texte en gras */
+  font-size: 1.2rem; /* Taille de police légèrement plus grande */
+  color: #333; /* Couleur du texte */
+}
+

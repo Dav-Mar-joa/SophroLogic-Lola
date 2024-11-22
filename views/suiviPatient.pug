@@ -1,0 +1,35 @@
+doctype html
+html(lang="fr")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="css/style_suiviPatient.css")
+    title Calendrier Hebdomadaire
+
+  body
+    div
+      form(action='/' method='get')
+        button#retourMenuPrincipal(type='submit') Menu d'accueil
+    .form-row-nom-valider
+        form(action="/votre-actionII" method="POST")
+            label(for="nomPatient") Nom du client :
+            select(id="nomPatient" name="nomPatient")
+                each patient in patients
+                    option(value=patient.nom) #{patient.nom}
+            button(type="submit") Valider
+            if patient
+                br
+                br
+                br
+                h2 Synthèse pour le protocole de #{patient.nom}
+                hr(style="width: 100%; border: 1px solid #000; margin: 20px 0;") 
+                p Besoins : #{patient.besoins}
+                p Ressources : #{patient.ressources}
+                p Contraintes : #{patient.contraintes}
+                p Aversions : #{patient.aversions}
+                p Nombres de scéances : #{patient.nombresSceances} 
+                p Protocole type : #{patient.protocoleType}
+    footer
+      br
+      p &copy; Sophrologic 2024. Tous droits réservés.
+      br             

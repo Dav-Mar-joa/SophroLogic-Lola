@@ -1,0 +1,107 @@
+/* Styles de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f3f4f6;
+  color: #333;
+  text-align: center;
+}
+
+/* Header */
+header {
+  margin-bottom: 20px;
+}
+header h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Boutons principaux */
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.button {
+  width: 200px;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+.button:hover {
+  transform: scale(1.05);
+}
+p {
+  margin-top: 20px; /* Espacement au-dessus du paragraphe */
+  font-size: 1.2rem; /* Taille du texte du message */
+  font-weight: bold; /* Mettre le texte en gras */
+}
+
+/* Couleurs distinctes pour chaque fonctionnalité */
+.paiementAnnuel {
+  background-color: #ff00dd;
+}
+.declarationPaiementsAnnuel {
+  background-color: #2196F3;
+}
+.recapitulatifPaiementsAnnuel {
+  background-color: #FF9800;
+}
+.nouveauPatient {
+  background-color: #ff00dd;
+}
+.boiteOutils {
+  background-color: #ff0000;
+  margin-top: 20px;
+  max-width: 20%;
+}
+.patients {
+  background-color: #00c8ff;
+}
+
+/* Responsive Design */
+@media (min-width: 601px) {
+  /* En version PC, le bouton "Documents" occupe une ligne entière */
+  .button.boiteOutils {
+      width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .button {
+      width: 75%;
+  }
+  header h1 {
+      font-size: 1.5rem;
+  }
+}
+
+#retourMenuPrincipal {
+    position: relative; 
+    margin: auto;      
+    margin-top: 1vh; 
+    margin-bottom: 2vh;              
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Press Start 2P';
+    background-color:rgb(81, 231, 17);
+    color: #000000;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: 3px solid #fff;
+  }

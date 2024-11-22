@@ -1,0 +1,176 @@
+doctype html
+html(lang="fr")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="css/style_nouveauPatient.css")
+    title Calendrier Hebdomadaire
+  body
+    //- Navigation des semaines
+    div
+      form(action='/' method='get')
+        button#retourMenuPrincipal(type='submit') Menu d'accueil
+ 
+    
+    form(action='/nouveauPatient' method='post')
+      p.ficheRenseignements Fiche de renseignements :
+      br
+
+      ul
+        li
+          .form-row-nom-prenom
+            label(for='nom') Nom&nbsp;:
+            input(type='text' id='nom' name='nom' required)
+            label(for='prenom') Prénom&nbsp;:
+            input(type='text' id='prenom' name='prenom' required)
+        li
+          label(for='email') E-mail&nbsp;:
+          input(type='email' id='email' name='email' required)
+        li
+          label(for='telephone') Téléphone&nbsp;:
+          input(type='number' name='telephone')
+        li
+          label(for='objetVisite') Objet de la visite&nbsp;:
+          textarea(id='objetVisite' name='objetVisite' required) 
+        li
+            label(for='etatDeSante') État de santé générale&nbsp;:
+            .form-row
+                textarea(id='etatDeSante' name='etatDeSante' placeholder='Décrire l\'état de santé générale...') 
+                label(for='choix') Note
+                    select(id='choixEtatDeSante' name='choixEtatDeSante')  
+                        option( value='RAS') RAS
+                        option( value='1') 1
+                        option( value='2') 2
+                        option( value='3') 3
+                        option( value='4') 4  
+                        option( value='5') 5 
+        li
+            label(for='traitementMedicalParticulier') Traitement médicale particulier&nbsp;:
+            textarea(id='traitementMedicalParticulier' name='traitementMedicalParticulier' placeholder='RAS' required)       
+        li
+            label(for='douleurSpecifique') Douleurs spécifiques&nbsp;:
+            .form-row
+                textarea(id='douleurSpecifique' name='douleurSpecifique' placeholder='Décrire l\'état de santé générale...') 
+                label(for='choix') Note
+                    select(id='choixdouleurSpecifique' name='choixdouleurSpecifique')  
+                        option( value='RAS') RAS
+                        option( value='1') 1
+                        option( value='2') 2
+                        option( value='3') 3
+                        option( value='4') 4  
+                        option( value='5') 5                                             
+        li
+            label(for='troubleDuSommeil') Troubles du sommeil&nbsp;:
+            .form-row
+                textarea(id='troubleDuSommeil' name='troubleDuSommeil' placeholder='Décrire l\'état de santé générale...') 
+                label(for='choix') Note
+                    select(id='choixTroubleDuSommeil' name='choixTroubleDuSommeil')  
+                        option( value='RAS') RAS
+                        option( value='1') 1
+                        option( value='2') 2
+                        option( value='3') 3
+                        option( value='4') 4  
+                        option( value='5') 5
+        li
+            label(for='troubleAlimentation') Troubles de l'alimentation&nbsp;:
+            .form-row
+                textarea(id='troubleAlimentation' name='troubleAlimentation' placeholder='Décrire l\'état de santé générale...') 
+                label(for='choix') Note
+                    select(id='choixTroubleAlimentation' name='choixTroubleAlimentation')  
+                        option( value='RAS') RAS
+                        option( value='1') 1
+                        option( value='2') 2
+                        option( value='3') 3
+                        option( value='4') 4  
+                        option( value='5') 5                
+        li
+            label(for='situationFamilliale') Situation et composition Familliale&nbsp;:
+            .form-row
+                textarea(id='situationFamilliale' name='situationFamilliale' placeholder='Décrire l\'état de santé générale...') 
+                label(for='choix') Note
+                    select(id='choixSituationFamilliale' name='choixSituationFamilliale')  
+                        option( value='RAS') RAS
+                        option( value='1') 1
+                        option( value='2') 2
+                        option( value='3') 3
+                        option( value='4') 4  
+                        option( value='5') 5   
+        li
+            label(for='situationProfessionnelle') Situation professionnelle&nbsp;:
+            .form-row
+                textarea(id='situationProfessionnelle' name='situationProfessionnelle' placeholder='Décrire l\'état de santé générale...') 
+                label(for='choix') Note
+                    select(id='choixSituationProfessionnelle' name='choixSituationProfessionnelle')  
+                        option( value='RAS') RAS
+                        option( value='1') 1
+                        option( value='2') 2
+                        option( value='3') 3
+                        option( value='4') 4  
+                        option( value='5') 5  
+        li
+            label(for='situationSociale') Situation sociale&nbsp;:
+            .form-row
+                textarea(id='situationSociale' name='situationSociale' placeholder='Décrire l\'état de santé générale...') 
+                label(for='choix') Note
+                    select(id='choixSituationSociale' name='choixSituationSociale')  
+                        option( value='RAS') RAS
+                        option( value='1') 1
+                        option( value='2') 2
+                        option( value='3') 3
+                        option( value='4') 4  
+                        option( value='5') 5 
+        li
+            label(for='aversions') Aversions&nbsp;:
+            .form-row
+                textarea(id='aversions' name='aversions' placeholder='Décrire l\'état de santé générale...') 
+                label(for='choix') Note
+                    select(id='choixAversions' name='choixAversions')  
+                        option( value='RAS') RAS
+                        option( value='1') 1
+                        option( value='2') 2
+                        option( value='3') 3
+                        option( value='4') 4  
+                        option( value='5') 5   
+        li
+            label(for='loisirs') Loisirs&nbsp;:
+            textarea(id='loisirs' name='loisirs' placeholder='RAS')  
+        li
+            label(for='ObjetsLieuxPrivilegies') Objets, Lieux privilégiés&nbsp;:
+            textarea(id='ObjetsLieuxPrivilegies' name='ObjetsLieuxPrivilegies' placeholder='RAS') 
+        li
+            label(for='definitionObjectif') Definition de l'objectif&nbsp;:
+            textarea(id='definitionObjectif' name='definitionObjectif' placeholder='RAS')  
+        li
+          .form-row-nom-prenom
+            label(for='resourcesSituationnelles') Ressources Situationnelles&nbsp;:
+            input(type='text' id='resourcesSituationnelles' name='resourcesSituationnelles')
+          .form-row-nom-prenom  
+            label(for='indicateursDeReussite') Indicateurs de réussite&nbsp;:
+            input(type='text' id='indicateursDeReussite' name='indicateursDeReussite') 
+        br    
+        hr(style="width: 100%; border: 1px solid #000; margin: 20px 0;")               
+        p.syntheseProtocole Synthèse pour le protocole
+        br
+        ul
+            li
+            label(for='besoins') Besoins&nbsp;:
+            input(type='text' id='besoins' name='besoins' required)  
+            li
+            label(for='ressources') Ressources&nbsp;:
+            input(type='text' id='ressources' name='ressources' required) 
+            li
+            label(for='contraintes') Contraintes&nbsp;:
+            input(type='text' id='contraintes' name='contraintes' required) 
+            li
+            label(for='aversionsResume') Aversions&nbsp;:
+            input(type='text' id='aversionsResume' name='aversionsResume' required) 
+            li
+            label(for='nombresSceances') Nombres de scéances&nbsp;:
+            input(type='number' id='nombresSceances' name='nombresSceances' required ) 
+            li
+            label(for='protocoleType') Protocole type&nbsp;:
+            input(type='text' id='protocoleType' name='protocoleType' required )                
+        button(class = "submit" type='submit') Soumettre
+    footer
+         p &copy; Sophrologic 2024. Tous droits réservés.
+         br  

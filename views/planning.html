@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style_planning.css">
+  <title>Calendrier Hebdomadaire</title>
+
+</head>
+<body>
+
+  <!-- Navigation des semaines -->
+  <div class="week-navigation">
+    <button id="prev-week">&laquo; Semaine précédente</button>
+    <button id="next-week">Semaine suivante &raquo;</button>
+  </div>
+
+  <!-- Calendrier hebdomadaire -->
+  <div class="calendar">
+    <div class="day">
+      <h3>Lundi <span class="date"></span></h3>
+      <div class="patient-list">
+        <div class="patient-item">
+          <span>John Doe</span>
+          <div class="patient-buttons">
+            <button>Modifier</button>
+            <button>Supprimer</button>
+          </div>
+        </div>
+      </div>
+      <button class="add-patient">Ajouter un patient</button>
+    </div>
+    <div class="day">
+      <h3>Mardi <span class="date"></span></h3>
+      <div class="patient-list"></div>
+      <button class="add-patient">Ajouter un patient</button>
+    </div>
+    <div class="day">
+      <h3>Mercredi <span class="date"></span></h3>
+      <div class="patient-list"></div>
+      <button class="add-patient">Ajouter un patient</button>
+    </div>
+    <div class="day">
+      <h3>Jeudi <span class="date"></span></h3>
+      <div class="patient-list"></div>
+      <button class="add-patient">Ajouter un patient</button>
+    </div>
+    <div class="day">
+      <h3>Vendredi <span class="date"></span></h3>
+      <div class="patient-list"></div>
+      <button class="add-patient">Ajouter un patient</button>
+    </div>
+    <div class="day">
+      <h3>Samedi <span class="date"></span></h3>
+      <div class="patient-list"></div>
+      <button class="add-patient">Ajouter un patient</button>
+    </div>
+    <div class="day">
+      <h3>Dimanche <span class="date"></span></h3>
+      <div class="patient-list"></div>
+      <button class="add-patient">Ajouter un patient</button>
+    </div>
+  </div>
+
+  <script>
+    // Calcul de la date pour chaque jour de la semaine
+    const days = document.querySelectorAll('.day');
+    const currentDate = new Date();
+    let currentWeekStartDate = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 1));
+
+    function updateCalendarDates() {
+      let date = new Date(currentWeekStartDate);
+
+      days.forEach(day => {
+        const dateElement = day.querySelector('.date');
+        dateElement.textContent = date.toLocaleDateString('fr-FR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+        date.setDate(date.getDate() + 1);
+      });
+    }
+
+    // Gestion de la navigation des semaines
+    document.getElementById('prev-week').addEventListener('click', () => {
+      currentWeekStartDate.setDate(currentWeekStartDate.getDate() - 7);
+      updateCalendarDates();
+    });
+
+    document.getElementById('next-week').addEventListener('click', () => {
+      currentWeekStartDate.setDate(currentWeekStartDate.getDate() + 7);
+      updateCalendarDates();
+    });
+
+    // Initialiser le calendrier avec les dates de la semaine actuelle
+    updateCalendarDates();
+  </script>
+
+</body>
+</html>
+
+
+
+
+  

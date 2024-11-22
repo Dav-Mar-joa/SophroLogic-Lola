@@ -1,0 +1,31 @@
+doctype html
+html(lang="fr")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="css/style_recapitulatifPaiementsAnnuel.css")
+    title Calendrier Hebdomadaire
+
+  body
+    div
+      // Menu d'accueil
+      form(action='/documents' method='get')
+        button#retourMenuPrincipal(type='submit') Documents
+
+        h2 Récapitulatif des paiements annuel 
+        hr(style="width: 100%; border: 1px solid #000; margin: 20px 0;")
+        ul
+          li
+            .form-row-nom-prenom
+              p Montant chambre syndicale : #{paiementsAnnuel.montantChambreSyndicale} € 
+            .form-row-nom-prenom
+              p Montant Resalib : #{paiementsAnnuel.montantResalib} €
+            .form-row-nom-prenom
+              p Montant assurance pro&nbsp;: #{paiementsAnnuel.montantAssurancePro} € 
+        p.affichageMaJ Mise à Jour&nbsp;: #{paiementsAnnuel.dateMaJ}       
+            //- .form-row-nom-prenom
+              p.affichageMaJ Mise à Jour&nbsp;: #{paiementsAnnuel.dateMaJ}           
+
+
+    footer
+      p &copy; Sophrologic 2024. Tous droits réservés.

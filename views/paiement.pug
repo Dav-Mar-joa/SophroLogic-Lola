@@ -1,0 +1,56 @@
+doctype html
+html(lang="fr")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="css/style_paiement.css")
+    title Calendrier Hebdomadaire
+
+  body
+    div
+      // Menu d'accueil
+      form(action='/' method='get')
+        button#retourMenuPrincipal(type='submit') Menu d'accueil
+      br
+      // Formulaire pour le paiement
+      
+      form(action='/paiement' method='post')
+        h2 Paiement
+        hr(style="width: 100%; border: 1px solid #000; margin: 20px 0;")
+        ul
+          li
+            .form-row-nom-valider
+              form(action="/votre-actionIII" method="POST")
+                label(for="nomPatient") Nom du client :
+                select(id="nomPatient" name="patientId")
+                  each patient in patients
+                    option(value=patient._id) #{patient.nom}
+            .form-row-nom-prenom
+              label(for='montant') Montant&nbsp;:
+              input(type='number' id='montant' name='montant' required)
+              span € 
+            .form-row-nom-prenom
+                  label(for='datePaiement') Date de paiement&nbsp;:
+                  input(type='date' id='datePaiement' name='datePaiement', value=dateAujourdHui required)
+            .form-row-nom-prenom
+              label(for='modePaiement') Mode de paiement&nbsp;:
+              select(id='modePaiement' name='modePaiement' required) 
+                  option( value='0') 
+                  option( value='CB') CB
+                  option( value='Cheque') Chéque
+                  option( value='Espèces') Espèces 
+                  option( value='VirementBancaire') Virement Bancaire    
+            //- .form-row-nom-prenom
+            //-   label(for='statutPaiement') Statut du paiement&nbsp;:
+            //-   select(id='statutPaiement' name='statutPaiement' required) 
+            //-       option( value='0') 
+            //-       option( value='Effectué') Effectué
+            //-       option( value='Non payé') Non payé                 
+            .form-row-nom-prenom
+              label(for='CommentairePaiement') Commentaires&nbsp;:
+              input(type='text' id='commentaire' name='commentaire')
+            button(class = "submit" type='submit') Soumettre            
+
+
+    footer
+      p &copy; Sophrologic 2024. Tous droits réservés.

@@ -1,0 +1,58 @@
+doctype html
+html(lang="fr")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="css/style_patients.css")
+    title Calendrier Hebdomadaire
+  body
+    div
+      form(action='/documents' method='get')
+        button#retourMenuPrincipal(type='submit') Documents
+    .form-row-nom-valider
+        form(action="/votre-action" method="POST")
+            label(for="nomPatient") Nom du patient :
+            select(id="nomPatient" name="nomPatient")
+                each patient in patients
+                    option(value=patient.nom) #{patient.nom}
+            button(type="submit") Valider
+            if patient
+                br
+                br
+                br
+                h2 Informations du Patient : 
+                hr(style="width: 100%; border: 1px solid #000; margin: 20px 0;") 
+                
+                p Nom : #{patient.nom}
+                p Prénom : #{patient.prenom}
+                p Email : #{patient.email}
+                p Téléphone : #{patient.telephone}
+                hr(style="width: 100%; border: 1px solid #000; margin: 20px 0;") 
+                p Objet de la visite : #{patient.objetVisite}
+                p Etat de Santé : #{patient.etatDeSante} (#{patient.choixEtatDeSante})
+                p Traitement Médicale particulier : #{patient.traitementMedicalParticulier}
+                
+                p Douleurs spécifiques : #{patient.douleurSpecifique} (#{patient.choixdouleurSpecifique})
+
+                p Troubles du sommeil : #{patient.troubleDuSommeil} (#{patient.choixTroubleDuSommeil})
+                p Troubles alimentation : #{patient.troubleAlimentation} (#{patient.choixTroubleAlimentation})
+
+                p Situation et composition familliale : #{patient.situationFamilliale} (#{patient.choixSituationFamilliale})
+
+                p Situation professionnelle : #{patient.situationProfessionnelle} (#{patient.choixSituationProfessionnelle})
+
+                p Situation sociale : #{patient.situationSociale} (#{patient.choixSituationSociale})
+
+                p Aversions : #{patient.aversions} (#{patient.choixAversions})
+
+                p Loisirs : #{patient.loisirs} 
+
+                p Objets, Lieux privilégiés : #{patient.ObjetsLieuxPrivilegies} 
+                hr(style="width: 100%; border: 1px solid #000; margin: 20px 0;") 
+                p Définition de l'objectifs : #{patient.definitionObjectif} 
+                p Ressources situationnelles : #{patient.resourcesSituationnelles} 
+                p Indicateurs de réussite : #{patient.indicateursDeReussite} 
+                hr(style="width: 100%; border: 1px solid #000; margin: 20px 0;")  
+    footer
+         p &copy; Sophrologic 2024. Tous droits réservés.
+         br  

@@ -1,0 +1,156 @@
+
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Corps de page */
+    body {
+      background-color: #f4f4f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #333;
+    }
+    p {
+      margin-top: 20px; /* Espacement au-dessus du paragraphe */
+      font-size: 1.2rem; /* Taille du texte du message */
+      font-weight: bold; /* Mettre le texte en gras */
+    }
+
+    /* Navigation pour les semaines */
+    .week-navigation {
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      max-width: 1000px;
+      margin: 20px 0;
+    }
+    .week-navigation button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .week-navigation button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Calendrier */
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 15px;
+      width: 90%;
+      max-width: 1000px;
+    }
+
+    /* Jours de la semaine */
+    .day {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .day h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .day h3 .date {
+      font-size: 14px;
+      color: #555;
+      margin-left: 5px;
+    }
+
+    /* Liste des patients */
+    .patient-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .patient-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px;
+      background-color: #e9ecef;
+      border-radius: 5px;
+    }
+    .patient-item span {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .patient-buttons {
+      display: flex;
+      gap: 5px;
+    }
+    .patient-buttons button {
+      font-size: 12px;
+      padding: 5px 10px;
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .patient-buttons button:hover {
+      background-color: #495057;
+    }
+
+    /* Bouton Ajouter */
+    .add-patient {
+      padding: 10px;
+      font-size: 14px;
+      width: 100%;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: auto;
+      transition: background-color 0.2s;
+    }
+    .add-patient:hover {
+      background-color: #218838;
+    }
+    #retourMenuPrincipal {
+        position: relative; 
+        margin: auto;      
+        margin-top: 1vh; 
+        margin-bottom: 2vh;              
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-family: 'Press Start 2P';
+        background-color:rgb(81, 231, 17);
+        color: #000000;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border: 3px solid #fff;
+      }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .calendar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .patient-buttons button {
+        padding: 4px 8px;
+      }
+    }

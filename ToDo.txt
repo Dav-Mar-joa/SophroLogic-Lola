@@ -1,0 +1,6 @@
+voir pour organisme 
+patient -> CLIENT 
+
+Comptabilité -> + entrée argent (scéances )- depense (box, fourniture, stage, assurance pro, chambre syndicale etc)
+
+

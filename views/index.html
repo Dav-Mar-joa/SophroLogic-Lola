@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style_index.css">
+    <title>Sophrologic</title>
+  </head>
+  <body>
+    <!-- En-tête -->
+    <header>
+      <h1>Sophrologic</h1>
+    </header>
+
+    <!-- Conteneur des boutons principaux -->
+    <div class="buttons-container">
+      <a class="button nouveauPatient" href="/nouveauPatient">Nouveau Patient</a>
+      <a class="button patients" href="/patients">Patients</a>
+      <a class="button suivi" href="/suiviPatient">Suivi Patient</a>
+      <a class="button planning" href="/planning">Planning</a>
+      <a class="button comptabilite" href="/paiement">Paiement</a>
+      <a class="button boiteOutils" href="/documents">Documents</a>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+      <br>
+      <p>&copy; Sophrologic 2024. Tous droits réservés.</p>
+      <br>
+
+    </footer>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+              console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch((error) => {
+              console.error('Service Worker registration failed:', error);
+            });
+        }
+      </script>
+  </body>
+</html>

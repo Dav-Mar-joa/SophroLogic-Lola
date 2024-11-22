@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style_suiviPatient.css">
+    <title>Calendrier Hebdomadaire</title>
+</head>
+<body>
+    <!-- Navigation des semaines -->
+    <div>
+        <form action="/" method="get">
+            <button id="retourMenuPrincipal" type="submit">Menu d'accueil</button>
+        </form>
+    </div>
+    
+    <p>Nouveau patient</p>
+    <form action="/nouveauPatient" method="post">
+      <ul>
+        <li>
+          <label for="name">Nom&nbsp;:</label>
+          <input type="text" id="name" name="name" />
+        </li>
+        <li>
+          <label for="prenom">Prénom&nbsp;:</label>
+          <input type="text" id="prenom" name="prenom" />
+        </li>
+        <li>
+          <label for="mail">E-mail&nbsp;:</label>
+          <input type="email" id="mail" name="user_mail" />
+        </li>
+        <li>
+          <label for="msg">Message&nbsp;:</label>
+          <textarea id="msg" name="user_message"></textarea>
+        </li>
+      </ul>
+    </form>
+
+</body>
+</html>
+
+    <!-- db.Patients.insertOne({
+  "_id": ObjectId("652a1f9c79f1c0f129f1e123"),
+  "nom": "Doe",
+  "prenom": "John",
+  "date_naissance": "1980-01-01",
+  "contact": {
+    "email": "john.doe@example.com",
+    "telephone": "0123456789"
+  },
+  "adresse": "123 Rue Exemple, Ville",
+  "notes_medicales": ["Aucune allergie connue"],
+  "historique_seances": ["seance1", "seance2"]
+}) -->
