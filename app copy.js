@@ -32,6 +32,157 @@ app.get('/', (req, res) => {
     console.log("Route '/' atteinte");
     res.render('index');
 });
+// app.get('/planning', async(req, res) => {
+//     try {
+//         const collection = db.collection(process.env.MONGODB_COLLECTION);
+//         const appointments = await Appointment.find({}, { nom: 1, date: 1, heure: 1, typeConsultation: 1 }).sort({ date: 1, heure: 1 });
+        
+//         // Récupère tous les patients et sélectionne uniquement le champ `nom`
+//         const patients = await collection.find({}, { projection: { nom: 1, _id: 0 } }).toArray();
+        
+//         // Envoie les données à la vue Pug
+//         res.render('planning', { patients, appointments });
+//     } catch (err) {
+//         res.status(500).send('Erreur lors de la récupération des noms');
+//     }
+// });
+// app.get('/planning', async(req, res) => {
+//     try {
+//         const collection = db.collection(process.env.MONGODB_COLLECTION);
+
+//         const appointments = await collection.find({}, { nom: 1, date: 1, heure: 1, typeConsultation: 1 }).sort({ date: 1, heure: 1 }).toArray();
+
+//         appointments.forEach(appointment => {
+//             console.log(`Séances pour ${appointment.nom} ${appointment.prenom}:`);
+//             appointment.sceances.forEach(seance => {
+//               console.log(`- Date: ${seance.date}, heure: ${seance.heure}, type: ${seance.typeConsultation}`);
+//             });
+//           });
+
+// //           app.get('/getAppointments', async (req, res) => {
+// //             const startDate = new Date(req.query.start);
+// //             const endDate = new Date(req.query.end);
+        
+// //             // Vérification des dates
+// //             if (isNaN(startDate) || isNaN(endDate)) {
+// //                 return res.status(400).send('Invalid date format');
+// //             }
+        
+// //             try {
+// //                 const collection = db.collection(process.env.MONGODB_COLLECTION);
+                
+// //                 const appointments = await collection.find({
+// //                     "sceances.date": {
+// //                         $gte: startDate.toISOString().split('T')[0],  // Format YYYY-MM-DD
+// //                         $lte: endDate.toISOString().split('T')[0],    // Format YYYY-MM-DD
+// //                     }
+// //                 }).toArray();
+        
+// //                 appointments.forEach(appointment => {
+// //                     const appointmentDateTime = new Date(`${appointment.sceances.date}T${appointment.sceances.heure}:00Z`);
+// //                     console.log(`Rendez-vous: ${appointmentDateTime.toString()}, Type: ${appointment.sceances.typeConsultation}`);
+// //                 });
+
+// //                 console.log(`Date de début: ${startDate}, Date de fin: ${endDate}`);
+// // console.log(`Rendez-vous trouvés: ${JSON.stringify(appointments)}`);
+        
+// //                 res.json({ appointments });
+// //             } catch (err) {
+// //                 console.error(err);
+// //                 res.status(500).send('Erreur lors de la récupération des rendez-vous');
+// //             }
+// //         });
+// app.get('/getAppointments', async (req, res) => {
+//     const startDate = new Date(req.query.start);
+//     const endDate = new Date(req.query.end);
+
+//     // Vérification des dates
+//     if (isNaN(startDate) || isNaN(endDate)) {
+//         return res.status(400).send('Invalid date format');
+//     }
+
+//     try {
+//         const collection = db.collection(process.env.MONGODB_COLLECTION);
+        
+//         // Récupération des rendez-vous
+//         const appointments = await collection.find({
+//             "sceances.date": {
+//                 $gte: startDate.toISOString().split('T')[0],
+//                 $lte: endDate.toISOString().split('T')[0],
+//             }
+//         }).toArray();
+//         console.log("------ appointenements ----------------")
+//         console.log(startDate.toISOString().split('T')[0])
+//         console.log(endDate.toISOString().split('T')[0])
+//         console.log("------ appointenements ----------------")
+
+//         // Traitement des rendez-vous récupérés
+//         const formattedAppointments = appointments.flatMap(appointment => {
+//             return appointment.sceances.map(sceance => {
+//                 const date = sceance.date; // Format: YYYY-MM-DD
+//                 const time = sceance.heure; // Format: HH:mm
+
+//                 // Log des valeurs pour débogage
+//                 console.log(`Processing appointment - date: ${date}, time: ${time}`);
+
+//                 // Vérification de l'existence des valeurs
+//                 if (!date || !time) {
+//                     console.error('Date or time is missing for appointment:', sceance);
+//                     return null; // Retourner null si la date ou l'heure est manquante
+//                 }
+
+//                 // Créez un objet Date en utilisant le bon format
+//                 const appointmentDateTime = new Date(`${date}T${time}:00`); // UTC
+//                 console.log(`appointmentDateTime: ${appointmentDateTime}, isValid: ${!isNaN(appointmentDateTime)}`);
+
+//                 // Vérifiez que appointmentDateTime est valide
+//                 if (isNaN(appointmentDateTime.getTime())) {
+//                     console.error('Invalid date for appointment:', sceance);
+//                     return null; // Retourner null si la date est invalide
+//                 }
+
+//                 // Vérification de la conversion locale
+//                 const localDate = appointmentDateTime.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+//                 console.log(`Local date: ${localDate}`);
+
+//                 const [dateString, timeString] = localDate.split(',');
+
+//                 // Vérification de la définition des variables
+//                 if (!dateString || !timeString) {
+//                     console.error('Date or time is undefined for appointment:', localDate);
+//                     return null; // Retourner null si date ou time est indéfini
+//                 }
+
+//                 // Nettoyage des chaînes
+//                 return {
+//                     nom: appointment.nom || 'Inconnu',
+//                     prenom: appointment.prenom || 'Inconnu',
+//                     date: dateString.trim(),
+//                     heure: timeString.trim(),
+//                     type: sceance.typeConsultation || 'Inconnu',
+//                 };
+//             }).filter(Boolean); // Filtrer les rendez-vous nuls
+//         });
+
+//         console.log("Rendez-vous trouvés:", formattedAppointments);
+
+//         // Envoi de la réponse au client
+//         res.json({ appointments: formattedAppointments });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).send('Erreur lors de la récupération des rendez-vous');
+//     }
+// });
+
+//         // Récupère tous les patients et sélectionne uniquement le champ `nom`
+//         const patients = await collection.find({}, { projection: { nom: 1, _id: 0 } }).toArray();
+        
+//         // Envoie les données à la vue Pug
+//         res.render('planning', { patients,appointments });
+//     } catch (err) {
+//         res.status(500).send('Erreur lors de la récupération des noms');
+//     }
+// });
 app.get('/documents', (req, res) => {
     console.log("Route '/documents' atteinte");
     res.render('documents');
