@@ -16,12 +16,16 @@ body {
   color: #333; /* Couleur du texte */
   text-align: center;
 }
+
 textarea {
-  width: 300px; /* Limite la largeur à 300 pixels */
-  max-width: 100%; /* Permet au textarea de s'adapter à l'écran tout en gardant la largeur max */
-  height: auto; /* Permet à la hauteur de s'adapter au contenu */
-  min-height: 5vh; /* Définissez une hauteur minimale si nécessaire */
-  resize: none; /* Permet de redimensionner verticalement uniquement */
+  width: 300px; /* Largeur maximale */
+  max-width: 100%; /* S'adapte à l'écran */
+  height: auto;
+  min-height: 5vh;
+  resize: none; /* Pas de redimensionnement */
+  overflow-wrap: break-word; /* Permet de gérer les mots longs */
+  word-wrap: break-word; /* Compatibilité ancienne */
+  white-space: pre-wrap; /* Préserve les sauts de ligne tout en autorisant les retours automatiques */
 }
 
 /* Styles pour le header */
