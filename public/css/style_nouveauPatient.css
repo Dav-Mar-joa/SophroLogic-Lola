@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
 
 body {
@@ -12,16 +11,29 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
   background-color: #f3f4f6; /* Couleur de fond douce */
   color: #333; /* Couleur du texte */
   text-align: center;
 }
+.select-centrer {
+  text-align: center; /* Ceci centrera le texte dans le select */
+  background-color: rgb(230, 230, 230);
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 5px;
+  /* padding-bottom: 10px; */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  /* line-height: 1.5; */
+}
 textarea {
-  width: 300px; /* Largeur maximale */
-  max-width: 100%; /* S'adapte à l'écran */
-  height: auto;
-  min-height: 5vh;
-  resize: none; /* Pas de redimensionnement */
+  width: 300px; /* Limite la largeur à 300 pixels */
+  max-width: 100%; /* Permet au textarea de s'adapter à l'écran tout en gardant la largeur max */
+  height: auto; /* Permet à la hauteur de s'adapter au contenu */
+  min-height: 5vh; /* Définissez une hauteur minimale si nécessaire */
+  resize: none; /* Permet de redimensionner verticalement uniquement */
   overflow-wrap: break-word; /* Permet de gérer les mots longs */
   word-wrap: break-word; /* Compatibilité ancienne */
   white-space: pre-wrap; /* Préserve les sauts de ligne tout en autorisant les retours automatiques */
@@ -98,7 +110,12 @@ textarea:focus {
 .ficheRenseignements{
   margin-bottom: 2%;
 }
-
+.champsNombre{
+  margin-top: 5px;
+  padding: 8px;
+  text-align: center;
+  border-radius: 5px;
+}
 /* Style du bouton */
 button {
   background-color: #2196F3; /* Couleur de fond du bouton */
@@ -120,16 +137,24 @@ p {
   margin-top: 20px; /* Espacement au-dessus du paragraphe */
   font-size: 1.2rem; /* Taille du texte du message */
   font-weight: bold; /* Mettre le texte en gras */
+  overflow-wrap: break-word; /* Permet de gérer les mots longs */
+  word-wrap: break-word; /* Compatibilité ancienne */
+  white-space: pre-wrap; /* Préserve les sauts de ligne tout en autorisant les retours automatiques */
 }
 #retourMenuPrincipal {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
   position: relative; 
   margin: auto;      
   margin-top: 1vh; 
   margin-bottom: 2vh;              
   padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
   border: none;
   border-radius: 5px;
-  background-color:rgb(81, 231, 17);
+  /* background-color:rgb(81, 231, 17); */
+  background-color: rgb(81, 231, 17);
   color: #000000;
   font-size: 1.2rem;
   cursor: pointer;

@@ -4,60 +4,116 @@ html(lang="fr")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet" href="css/style_planning.css")
+    link(href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap", rel="stylesheet")
     title Calendrier Hebdomadaire
 
   body
-  
+
     //- Navigation des semaines
+    p Planning
     div
       form(action='/' method='get')
-        button#retourMenuPrincipal Menu d'acceuil 
+        button#retourMenuPrincipal Menu d'accueil 
     .week-navigation
-      button#prev-week &laquo; Semaine précédente
-      button#next-week Semaine suivante &raquo; 
+      button#prev-week(data-direction="-1") &laquo; Semaine précédente
+      button#next-week(data-direction="1") Semaine suivante &raquo; 
+
     //- Calendrier hebdomadaire
     .calendar
       each day, index in ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
         .day
           h3 #{day} 
           .date
+            //- Calculer la date réelle pour chaque jour de la semaine
+            - let currentDate = new Date(); // Date actuelle
+            - let startOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 1)); // Premier jour de la semaine
+            - let currentDay = new Date(startOfWeek);
+            - currentDay.setDate(currentDay.getDate() + index);
+            p #{currentDay.toLocaleDateString()} // Afficher la date sous forme lisible
           .patient-list
             br 
-            if day == "Lundi" 
-              .patient-item
-                span John Doe
-                .patient-buttons
-                  button Modifier
-                  button Supprimer
-          button.add-patient Ajouter un client
+            //- Affichage des séances pour chaque patient
+            each appointment in appointments
+              each seance in appointment.sceances
+                //- Comparer la date de la séance avec la date actuelle
+                - let seanceDate = new Date(seance.date);
+                if seanceDate.toDateString() === currentDay.toDateString()
+                  .patient-item
+                    span #{appointment.nom} #{appointment.prenom}
+                    span #{seance.heure}
+                    span #{seance.typeConsultation === 'presentiel' ? '🪑' : '💻'}
+                    .patient-buttons
+                      button ✏️
+                      button 🗑️ 
+
+    .form-container(style="margin-top: 10px;")
+      button(type="button" id="toggleForm") Prise de rendez-vous
+    .form-container(style="margin-top: 10px; display: none;" id="formAjoutRendezVous")
+      p Prise de rendez-vous :
+      hr(style="width: 100%; border: 1px solid #000; margin: 20px 0;")
+      form(action="/ajoutRendezVous" method="POST")
+        label(for="nomPatientAjoutRendezVous") Nom du client :
+        select(id="nomPatientAjoutRendezVous" name="nomPatientAjoutRendezVous" required)
+          each patient in patients
+            option(value=patient.nom) #{patient.nom}
+        label(for='dateJour') Date&nbsp;:
+          input(type='date' id='dateJour' name='dateJour' value=dateAujourdHui required)
+        label(for='dateHeure') Heure&nbsp;:
+          input(type='time' id='dateHeure' name='dateHeure' value=dateAujourdHui required)  
+        label(for='typeConsultation') Type de consultations&nbsp;:
+          select(id='typeConsultation' name='typeConsultation' required) 
+            option(value='0') Sélectionnez un type
+            option(value='presentiel') 🪑 (Présentielle)
+            option(value='visio') 💻 (Visio)
+        button(type="submit") Ajouter
+    .form-container(style="margin-top: 10px;")
+      button(type="button" id="toggleFormTachePerso") Tache Perso
+    .form-container(style="margin-top: 10px; display: none;" id="formTachePerso")
+      p Tache Perso :
+      hr(style="width: 100%; border: 1px solid #000; margin: 20px 0;")
+      form(action="/ajoutTachePerso" method="POST")
+        label(for='tachePerso') Tâche&nbsp;:
+          input(type='text' id='nom' name='tachePerso' required)
+        label(for='tdateJourTachePerso') Date&nbsp;:
+          input(type='date' id='dateJourTachePerso' name='dateJourTachePerso' value=dateAujourdHui required)
+        label(for='dateHeureTachePerso') Heure&nbsp;:
+          input(type='time' id='dateHeureTachePerso' name='dateHeureTachePerso' value=dateAujourdHui required)  
+        button(type="submit") Ajouter
     footer
       br
       p &copy; Sophrologic 2024. Tous droits réservés.
       br       
     script(src="js/script_calendrier.js")
-    //- script.
-    //-   const days = document.querySelectorAll('.day');
-    //-   const currentDate = new Date();
-    //-   let currentWeekStartDate = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 1));
+    script.
+      document.addEventListener("DOMContentLoaded", function () {
+        const formContainer = document.getElementById("formAjoutRendezVous");
+        const toggleButton = document.getElementById("toggleForm");
 
-    //-   function updateCalendarDates() {
-    //-     let date = new Date(currentWeekStartDate);
+        // Masquer le formulaire au départ
+        formContainer.style.display = "none"; 
 
-    //-     days.forEach(day => {
-    //-       const dateElement = day.querySelector('.date');
-    //-       dateElement.textContent = date.toLocaleDateString('fr-FR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    //-       date.setDate(date.getDate() + 1);
-    //-     });
-    //-   }
+        toggleButton.addEventListener("click", function () {
+          if (formContainer.style.display === "none") {
+            formContainer.style.display = "block"; // Afficher le formulaire
+          } else {
+            formContainer.style.display = "none"; // Masquer le formulaire
+          }
+        });
+      });
+    script.
+      document.addEventListener("DOMContentLoaded", function () {
+        const formContainer = document.getElementById("formTachePerso");
+        const toggleButton = document.getElementById("toggleFormTachePerso");
 
-    //-   document.getElementById('prev-week').addEventListener('click', () => {
-    //-     currentWeekStartDate.setDate(currentWeekStartDate.getDate() - 7);
-    //-     updateCalendarDates();
-    //-   });
+        // Masquer le formulaire au départ
+        formContainer.style.display = "none"; 
 
-    //-   document.getElementById('next-week').addEventListener('click', () => {
-    //-     currentWeekStartDate.setDate(currentWeekStartDate.getDate() + 7);
-    //-     updateCalendarDates();
-    //-   });
-
-    //-   updateCalendarDates();
+        toggleButton.addEventListener("click", function () {
+          if (formContainer.style.display === "none") {
+            formContainer.style.display = "block"; // Afficher le formulaire
+          } else {
+            formContainer.style.display = "none"; // Masquer le formulaire
+          }
+        });
+      });  
+    

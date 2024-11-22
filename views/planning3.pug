@@ -1,0 +1,14 @@
+each appointment in appointments
+  each seance in appointment.sceances
+    - if (seance.date)
+      - let seanceDate = new Date(seance.date);
+      - if (!isNaN(seanceDate.getTime())) // Vérifie que la date est valide
+        - let currentDayDateString = currentDay.toDateString(); // Calcule une fois
+        if seanceDate.toDateString() === currentDayDateString
+          .patient-item
+            span #{appointment.nom} #{appointment.prenom}
+            span #{seance.heure}
+            span #{seance.typeConsultation === 'presentiel' ? '🪑' : '💻'}
+            .patient-buttons
+              button ✏️
+              button 🗑️

@@ -4,6 +4,7 @@ html(lang="fr")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet" href="css/style_nouveauPatient.css")
+    link(href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap", rel="stylesheet")
     title Calendrier Hebdomadaire
   body
     //- Navigation des semaines
@@ -28,7 +29,7 @@ html(lang="fr")
           input(type='email' id='email' name='email' required)
         li
           label(for='telephone') Téléphone&nbsp;:
-          input(type='number' name='telephone')
+          input(type='number' name='telephone' class='champsNombre')
         li
           label(for='objetVisite') Objet de la visite&nbsp;:
           textarea(id='objetVisite' name='objetVisite' required) 
@@ -37,7 +38,7 @@ html(lang="fr")
             .form-row
                 textarea(id='etatDeSante' name='etatDeSante' placeholder='Décrire l\'état de santé générale...') 
                 label(for='choix') Note
-                    select(id='choixEtatDeSante' name='choixEtatDeSante')  
+                    select(id='choixEtatDeSante' name='choixEtatDeSante' class='select-centrer')  
                         option( value='RAS') RAS
                         option( value='1') 1
                         option( value='2') 2
@@ -52,7 +53,7 @@ html(lang="fr")
             .form-row
                 textarea(id='douleurSpecifique' name='douleurSpecifique' placeholder='Décrire l\'état de santé générale...') 
                 label(for='choix') Note
-                    select(id='choixdouleurSpecifique' name='choixdouleurSpecifique')  
+                    select(id='choixdouleurSpecifique' name='choixdouleurSpecifique' class='select-centrer')  
                         option( value='RAS') RAS
                         option( value='1') 1
                         option( value='2') 2
@@ -64,7 +65,7 @@ html(lang="fr")
             .form-row
                 textarea(id='troubleDuSommeil' name='troubleDuSommeil' placeholder='Décrire l\'état de santé générale...') 
                 label(for='choix') Note
-                    select(id='choixTroubleDuSommeil' name='choixTroubleDuSommeil')  
+                    select(id='choixTroubleDuSommeil' name='choixTroubleDuSommeil' class='select-centrer')  
                         option( value='RAS') RAS
                         option( value='1') 1
                         option( value='2') 2
@@ -76,7 +77,7 @@ html(lang="fr")
             .form-row
                 textarea(id='troubleAlimentation' name='troubleAlimentation' placeholder='Décrire l\'état de santé générale...') 
                 label(for='choix') Note
-                    select(id='choixTroubleAlimentation' name='choixTroubleAlimentation')  
+                    select(id='choixTroubleAlimentation' name='choixTroubleAlimentation' class='select-centrer')  
                         option( value='RAS') RAS
                         option( value='1') 1
                         option( value='2') 2
@@ -88,7 +89,7 @@ html(lang="fr")
             .form-row
                 textarea(id='situationFamilliale' name='situationFamilliale' placeholder='Décrire l\'état de santé générale...') 
                 label(for='choix') Note
-                    select(id='choixSituationFamilliale' name='choixSituationFamilliale')  
+                    select(id='choixSituationFamilliale' name='choixSituationFamilliale' class='select-centrer')  
                         option( value='RAS') RAS
                         option( value='1') 1
                         option( value='2') 2
@@ -100,7 +101,7 @@ html(lang="fr")
             .form-row
                 textarea(id='situationProfessionnelle' name='situationProfessionnelle' placeholder='Décrire l\'état de santé générale...') 
                 label(for='choix') Note
-                    select(id='choixSituationProfessionnelle' name='choixSituationProfessionnelle')  
+                    select(id='choixSituationProfessionnelle' name='choixSituationProfessionnelle' class='select-centrer')  
                         option( value='RAS') RAS
                         option( value='1') 1
                         option( value='2') 2
@@ -112,7 +113,7 @@ html(lang="fr")
             .form-row
                 textarea(id='situationSociale' name='situationSociale' placeholder='Décrire l\'état de santé générale...') 
                 label(for='choix') Note
-                    select(id='choixSituationSociale' name='choixSituationSociale')  
+                    select(id='choixSituationSociale' name='choixSituationSociale' class='select-centrer')  
                         option( value='RAS') RAS
                         option( value='1') 1
                         option( value='2') 2
@@ -124,7 +125,7 @@ html(lang="fr")
             .form-row
                 textarea(id='aversions' name='aversions' placeholder='Décrire l\'état de santé générale...') 
                 label(for='choix') Note
-                    select(id='choixAversions' name='choixAversions')  
+                    select(id='choixAversions' name='choixAversions' class='select-centrer')  
                         option( value='RAS') RAS
                         option( value='1') 1
                         option( value='2') 2
@@ -165,12 +166,22 @@ html(lang="fr")
             label(for='aversionsResume') Aversions&nbsp;:
             input(type='text' id='aversionsResume' name='aversionsResume' required) 
             li
+            br
             label(for='nombresSceances') Nombres de scéances&nbsp;:
-            input(type='number' id='nombresSceances' name='nombresSceances' required ) 
+            input(type='number' id='nombresSceances' name='nombresSceances' class='champsNombre' required ) 
             li
-            label(for='protocoleType') Protocole type&nbsp;:
-            input(type='text' id='protocoleType' name='protocoleType' required )                
-        button(class = "submit" type='submit') Soumettre
+            br
+            //- label(for='protocoleType') Protocole type&nbsp;:
+            //- input(type='text' id='protocoleType' name='protocoleType' required ) 
+            label(for='protocoleType') Protocole Type :
+                    select(id='protocoleType' name='protocoleType' class='select-centrer') 
+                        option(value='protocoleType') 
+                        option(value='AméliorationDuQuotidien') Amélioration du quotidien
+                        option(value='PréparationMentale') Préparation mentale
+                        option(value='AccompagnementMédicale') Accompagnement médicale
+                        option(value='AccompagnementPathologique') Accompagnement pathologique
+              
+        button(class="submit" type='submit') Soumettre
     footer
          p &copy; Sophrologic 2024. Tous droits réservés.
          br  

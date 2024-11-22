@@ -3,10 +3,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
   }
   
   body {
     display: flex;
+    font-family: 'Montserrat', sans-serif;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -16,11 +18,11 @@
     text-align: center;
   }
   textarea {
-    width: 300px; /* Largeur maximale */
-    max-width: 100%; /* S'adapte à l'écran */
-    height: auto;
-    min-height: 5vh;
-    resize: none; /* Pas de redimensionnement */
+    width: 300px; /* Limite la largeur à 300 pixels */
+    max-width: 100%; /* Permet au textarea de s'adapter à l'écran tout en gardant la largeur max */
+    height: auto; /* Permet à la hauteur de s'adapter au contenu */
+    min-height: 5vh; /* Définissez une hauteur minimale si nécessaire */
+    resize: none; /* Permet de redimensionner verticalement uniquement */
     overflow-wrap: break-word; /* Permet de gérer les mots longs */
     word-wrap: break-word; /* Compatibilité ancienne */
     white-space: pre-wrap; /* Préserve les sauts de ligne tout en autorisant les retours automatiques */
@@ -103,8 +105,8 @@
     margin-bottom: 2%;
   }
   
-  /* Style du bouton */
   button {
+    margin-top: 10px;
     background-color: #2196F3; /* Couleur de fond du bouton */
     color: white; /* Couleur du texte du bouton */
     padding: 10px 15px; /* Espacement interne du bouton */
@@ -124,16 +126,22 @@
     margin-top: 20px; /* Espacement au-dessus du paragraphe */
     font-size: 1.2rem; /* Taille du texte du message */
     font-weight: bold; /* Mettre le texte en gras */
+    overflow-wrap: break-word; /* Permet de gérer les mots longs */
+    word-wrap: break-word; /* Compatibilité ancienne */
+    white-space: pre-wrap; /* Préserve les sauts de ligne tout en autorisant les retours automatiques */
   }
   #retourMenuPrincipal {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
     position: relative; 
     margin: auto;      
     margin-top: 1vh; 
     margin-bottom: 2vh;              
     padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     border: none;
     border-radius: 5px;
-    font-family: 'Press Start 2P';
     background-color:rgb(81, 231, 17);
     color: #000000;
     font-size: 1.2rem;
@@ -144,7 +152,7 @@
     margin-top: 5%;
   }
   button[type="submit"] {
-    margin-left: 10px; /* Ajustez selon vos besoins */
+    /* margin-left: 10px;  */
   }
   /* Styles pour les écrans de 600px ou moins */
   @media (max-width: 600px) {

@@ -1,0 +1,77 @@
+doctype html
+html(lang="fr")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="css/style_planning.css")
+    title Calendrier Hebdomadaire
+
+  body
+
+    //- Navigation des semaines
+    p Planning
+    div
+      form(action='/' method='get')
+        button#retourMenuPrincipal Menu d'accueil 
+    .week-navigation
+      button#prev-week &laquo; Semaine précédente
+      button#next-week Semaine suivante &raquo; 
+    //- Calendrier hebdomadaire
+    .calendar
+      each day, index in ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
+        .day
+          h3 #{day} 
+          .date
+          .patient-list
+            br 
+            if day == "Lundi" 
+              .patient-item
+                span John Doe
+                span Heure
+                span 🪑/💻
+                .patient-buttons
+                  button ✏️
+                  button 🗑️ 
+          //- button.add-patient Ajouter
+
+          //- Conteneur pour le formulaire d'ajout de patient
+    .form-container(style=" margin-top: 10px;")
+      p Prise de rendez-vous :
+      hr(style="width: 100%; border: 1px solid #000; margin: 20px 0;")
+      form(action="/ajoutRendezVous" method="POST")
+        label(for="nomPatientAjoutRendezVous") Nom du client :
+        select(id="nomPatientAjoutRendezVous" name="nomPatientAjoutRendezVous" required)
+          each patient in patients
+            option(value=patient.nom) #{patient.nom}
+        label(for='dateJour') Date&nbsp;:
+                  input(type='date' id='dateJour' name='dateJour', value=dateAujourdHui required)
+        label(for='dateHeure') Heure&nbsp;:
+                  input(type='time' id='dateHeure' name='dateHeure', value=dateAujourdHui required)  
+        label(for='typeConsultation') Type de consultations&nbsp;:
+              select(id='typeConsultation' name='typeConsultation' required) 
+                  option( value='0') 
+                  option( value='presentiel') 🪑 (Présentielle)
+                  option( value='visio') 💻 (Visio)
+                                      
+        button(type="submit") Ajouter
+
+    footer
+      br
+      p &copy; Sophrologic 2024. Tous droits réservés.
+      br       
+    script(src="js/script_calendrier.js")
+    //- script.
+    //-   const addButtons = document.querySelectorAll('.add-patient');
+    //-   const formContainers = document.querySelectorAll('.form-container');
+
+      //- addButtons.forEach((button, index) => {
+      //-   button.addEventListener('click', () => {
+      //-     const formContainer = formContainers[index];
+      //-     // Toggle l'affichage du conteneur de formulaire
+      //-     //- if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+      //-       formContainer.style.display = 'block';
+      //-     //- } else {
+      //-     //-   formContainer.style.display = 'none';
+      //-     //- }
+      //-   });
+      //- });

@@ -4,14 +4,15 @@ html(lang="fr")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet" href="css/style_patients.css")
+    link(href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap", rel="stylesheet")
     title Calendrier Hebdomadaire
   body
     div
       form(action='/' method='get')
-        button#retourMenuPrincipal(type='submit') Menu d'accueil
+        button#retourMenuPrincipal(type='submit') Menu d'acceuil  
     .form-row-nom-valider
         form(action="/votre-action" method="POST")
-            label(for="nomPatient") Nom du patient :
+            label(for="nomPatient") Nom du client :
             select(id="nomPatient" name="nomPatient")
                 each patient in patients
                     option(value=patient.nom) #{patient.nom}

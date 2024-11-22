@@ -32,95 +32,273 @@ app.get('/', (req, res) => {
     console.log("Route '/' atteinte");
     res.render('index');
 });
-app.get('/planning', (req, res) => {
-    console.log("Route '/planning' atteinte");
-    res.render('planning');
-});
-// app.get('/suiviPatient', (req, res) => {
-//     console.log("Route '/suiviPatient' atteinte");
-//     res.render('suiviPatient');
+// app.get('/planning', async(req, res) => {
+//     try {
+//         const collection = db.collection(process.env.MONGODB_COLLECTION);
+//         const appointments = await Appointment.find({}, { nom: 1, date: 1, heure: 1, typeConsultation: 1 }).sort({ date: 1, heure: 1 });
+        
+//         // Récupère tous les patients et sélectionne uniquement le champ `nom`
+//         const patients = await collection.find({}, { projection: { nom: 1, _id: 0 } }).toArray();
+        
+//         // Envoie les données à la vue Pug
+//         res.render('planning', { patients, appointments });
+//     } catch (err) {
+//         res.status(500).send('Erreur lors de la récupération des noms');
+//     }
 // });
-// app.get('/comptabilite', (req, res) => {
-//     console.log("Route '/comptabilite' atteinte");
-//     res.render('comptabilite');
+// app.get('/planning', async(req, res) => {
+//     try {
+//         const collection = db.collection(process.env.MONGODB_COLLECTION);
+
+//         const appointments = await collection.find({}, { nom: 1, date: 1, heure: 1, typeConsultation: 1 }).sort({ date: 1, heure: 1 }).toArray();
+
+//         appointments.forEach(appointment => {
+//             console.log(`Séances pour ${appointment.nom} ${appointment.prenom}:`);
+//             appointment.sceances.forEach(seance => {
+//               console.log(`- Date: ${seance.date}, heure: ${seance.heure}, type: ${seance.typeConsultation}`);
+//             });
+//           });
+
+// //           app.get('/getAppointments', async (req, res) => {
+// //             const startDate = new Date(req.query.start);
+// //             const endDate = new Date(req.query.end);
+        
+// //             // Vérification des dates
+// //             if (isNaN(startDate) || isNaN(endDate)) {
+// //                 return res.status(400).send('Invalid date format');
+// //             }
+        
+// //             try {
+// //                 const collection = db.collection(process.env.MONGODB_COLLECTION);
+                
+// //                 const appointments = await collection.find({
+// //                     "sceances.date": {
+// //                         $gte: startDate.toISOString().split('T')[0],  // Format YYYY-MM-DD
+// //                         $lte: endDate.toISOString().split('T')[0],    // Format YYYY-MM-DD
+// //                     }
+// //                 }).toArray();
+        
+// //                 appointments.forEach(appointment => {
+// //                     const appointmentDateTime = new Date(`${appointment.sceances.date}T${appointment.sceances.heure}:00Z`);
+// //                     console.log(`Rendez-vous: ${appointmentDateTime.toString()}, Type: ${appointment.sceances.typeConsultation}`);
+// //                 });
+
+// //                 console.log(`Date de début: ${startDate}, Date de fin: ${endDate}`);
+// // console.log(`Rendez-vous trouvés: ${JSON.stringify(appointments)}`);
+        
+// //                 res.json({ appointments });
+// //             } catch (err) {
+// //                 console.error(err);
+// //                 res.status(500).send('Erreur lors de la récupération des rendez-vous');
+// //             }
+// //         });
+// app.get('/getAppointments', async (req, res) => {
+//     const startDate = new Date(req.query.start);
+//     const endDate = new Date(req.query.end);
+
+//     // Vérification des dates
+//     if (isNaN(startDate) || isNaN(endDate)) {
+//         return res.status(400).send('Invalid date format');
+//     }
+
+//     try {
+//         const collection = db.collection(process.env.MONGODB_COLLECTION);
+        
+//         // Récupération des rendez-vous
+//         const appointments = await collection.find({
+//             "sceances.date": {
+//                 $gte: startDate.toISOString().split('T')[0],
+//                 $lte: endDate.toISOString().split('T')[0],
+//             }
+//         }).toArray();
+//         console.log("------ appointenements ----------------")
+//         console.log(startDate.toISOString().split('T')[0])
+//         console.log(endDate.toISOString().split('T')[0])
+//         console.log("------ appointenements ----------------")
+
+//         // Traitement des rendez-vous récupérés
+//         const formattedAppointments = appointments.flatMap(appointment => {
+//             return appointment.sceances.map(sceance => {
+//                 const date = sceance.date; // Format: YYYY-MM-DD
+//                 const time = sceance.heure; // Format: HH:mm
+
+//                 // Log des valeurs pour débogage
+//                 console.log(`Processing appointment - date: ${date}, time: ${time}`);
+
+//                 // Vérification de l'existence des valeurs
+//                 if (!date || !time) {
+//                     console.error('Date or time is missing for appointment:', sceance);
+//                     return null; // Retourner null si la date ou l'heure est manquante
+//                 }
+
+//                 // Créez un objet Date en utilisant le bon format
+//                 const appointmentDateTime = new Date(`${date}T${time}:00`); // UTC
+//                 console.log(`appointmentDateTime: ${appointmentDateTime}, isValid: ${!isNaN(appointmentDateTime)}`);
+
+//                 // Vérifiez que appointmentDateTime est valide
+//                 if (isNaN(appointmentDateTime.getTime())) {
+//                     console.error('Invalid date for appointment:', sceance);
+//                     return null; // Retourner null si la date est invalide
+//                 }
+
+//                 // Vérification de la conversion locale
+//                 const localDate = appointmentDateTime.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+//                 console.log(`Local date: ${localDate}`);
+
+//                 const [dateString, timeString] = localDate.split(',');
+
+//                 // Vérification de la définition des variables
+//                 if (!dateString || !timeString) {
+//                     console.error('Date or time is undefined for appointment:', localDate);
+//                     return null; // Retourner null si date ou time est indéfini
+//                 }
+
+//                 // Nettoyage des chaînes
+//                 return {
+//                     nom: appointment.nom || 'Inconnu',
+//                     prenom: appointment.prenom || 'Inconnu',
+//                     date: dateString.trim(),
+//                     heure: timeString.trim(),
+//                     type: sceance.typeConsultation || 'Inconnu',
+//                 };
+//             }).filter(Boolean); // Filtrer les rendez-vous nuls
+//         });
+
+//         console.log("Rendez-vous trouvés:", formattedAppointments);
+
+//         // Envoi de la réponse au client
+//         res.json({ appointments: formattedAppointments });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).send('Erreur lors de la récupération des rendez-vous');
+//     }
 // });
-app.get('/documents', (req, res) => {
-    console.log("Route '/documents' atteinte");
-    res.render('documents');
-});
-app.get('/declarationPaiementsAnnuel', (req, res) => {
-    console.log("Route '/declarationPaiementsAnnuel' atteinte");
-    res.render('declarationPaiementsAnnuel');
-});
-// app.get('/recapitulatifPaiementsAnnuel', (req, res) => {
-//     console.log("Route '/recapitulatifPaiementsAnnuel' atteinte");
-//     res.render('recapitulatifPaiementsAnnuel');
+
+//         // Récupère tous les patients et sélectionne uniquement le champ `nom`
+//         const patients = await collection.find({}, { projection: { nom: 1, _id: 0 } }).toArray();
+        
+//         // Envoie les données à la vue Pug
+//         res.render('planning', { patients,appointments });
+//     } catch (err) {
+//         res.status(500).send('Erreur lors de la récupération des noms');
+//     }
+// });
+// app.get('/documents', (req, res) => {
+//     console.log("Route '/documents' atteinte");
+//     res.render('documents');
+// });
+// app.get('/declarationPaiementsAnnuel', (req, res) => {
+//     console.log("Route '/declarationPaiementsAnnuel' atteinte");
+//     res.render('declarationPaiementsAnnuel');
 // });
 
 // app.post('/declarationPaiementsAnnuel', async (req, res) => {
-//     const paiementsAnnuel = {
+//     var paiementsAnnuel = {
 //         montantChambreSyndicale: req.body.montantChambreSyndicale,
 //         montantResalib: req.body.montantResalib,
-//         montantAssurancePro: req.body.montantAssurancePro  
-//     };
+//         montantAssurancePro: req.body.montantAssurancePro,
+//         dateMaJ:req.body.dateMaj
+//     };  
+
 //     try {
 //         const collection = db.collection(process.env.MONGODB_COLLECTION2);
-//         await collection.insertOne(paiementsAnnuel);
-//         res.redirect('/?success=true'); // Redirection avec un paramètre de succès
+        
+//         // Mettez à jour le document existant ou insérez un nouveau document s'il n'existe pas
+//         const result = await collection.updateOne(
+//             {}, // Critère de recherche (vide pour sélectionner le premier document)
+//             { $set: paiementsAnnuel }, // Met à jour les champs avec les nouvelles valeurs
+//             { upsert: true } // Crée un nouveau document si aucun document ne correspond
+//         );
+
+//         res.redirect('recapitulatifPaiementsAnnuel'); // Redirection avec un paramètre de succès
 //     } catch (err) {
 //         console.error("Erreur lors de l'ajout des paiements annuels:", err);
 //         res.status(500).send("Erreur lors de l'ajout des paiements annuels");
 //     }
 // });
 
-app.post('/declarationPaiementsAnnuel', async (req, res) => {
-    // const dateMaj = req.body.dateMaj; // Récupération de la date
-    // console.log(dateMaJ)
+app.get('/planning', async (req, res) => {
+    try {
+        const collection = db.collection(process.env.MONGODB_COLLECTION);
 
-    // // Vérification que dateMaj est défini et a la bonne longueur
-    // if (dateMaj && dateMaj.length === 10) {
-    //     const day = dateMaj.substring(8, 10);   // Extrait les caractères de l'index 8 à 10 (DD)
-    //     const month = dateMaj.substring(5, 7);  // Extrait les caractères de l'index 5 à 7 (MM)
-    //     const year = dateMaj.substring(0, 4);   // Extrait les caractères de l'index 0 à 4 (YYYY)
-        
-    //     // Format de date final
-    //     const date = `${day}/${month}/${year}`;
-        
-    //     console.log(date); // Affichage de la date au format DD/MM/YYYY
-    // } else {
-    //     console.error("La date fournie n'est pas au format attendu");
-    // }
-    var paiementsAnnuel = {
-        montantChambreSyndicale: req.body.montantChambreSyndicale,
-        montantResalib: req.body.montantResalib,
-        montantAssurancePro: req.body.montantAssurancePro,
-        dateMaJ:req.body.dateMaj
-    };
-    // console.log(paiementsAnnuel.dateMaJ)
-    // const day = paiementsAnnuel.dateMaj.substring(8, 10);   
-    // // Extrait les caractères de l'index 8 à 10 (DD)
-    //     const month = paiementsAnnuel.dateMaj.substring(5, 7);  
-    // // Extrait les caractères de l'index 5 à 7 (MM)
-    //     const year = paiementsAnnuel.dateMaj.substring(0, 4);
-    //     const date = `${day}/${month}/${year}`; 
+        // Récupération des rendez-vous avec projection des champs nécessaires
+        const appointments = await collection.find({}, { projection: { nom: 1, prenom: 1, sceances: 1 } })
+            .sort({ 'sceances.date': 1, 'sceances.heure': 1 })
+            .toArray();
 
-    // paiementsAnnuel.dateMaJ=date  
-    // console.log ("paiementsAnnuel.dateMaJ"+paiementsAnnuel.dateMaJ)   
+        // Traitement des rendez-vous pour les logs
+        appointments.forEach(appointment => {
+            console.log(`Séances pour ${appointment.nom} ${appointment.prenom}:`);
+            appointment.sceances.forEach(seance => {
+                console.log(`- Date: ${seance.date}, heure: ${seance.heure}, type: ${seance.typeConsultation}`);
+            });
+        });
+
+        // Récupère tous les patients et sélectionne uniquement le champ `nom` et `prenom`
+        const patients = await collection.find({}, { projection: { nom: 1, prenom: 1, _id: 0 } }).toArray();
+
+        // Envoie des données à la vue Pug
+        res.render('planning', { patients, appointments });
+    } catch (err) {
+        console.error("Erreur lors de la récupération des données :", err);
+        res.status(500).send('Erreur lors de la récupération des noms ou des rendez-vous');
+    }
+});
+
+app.get('/getAppointments', async (req, res) => {
+    const startDate = new Date(req.query.start);
+    const endDate = new Date(req.query.end);
+
+    // Vérification des dates
+    if (isNaN(startDate) || isNaN(endDate)) {
+        return res.status(400).send('Invalid date format');
+    }
 
     try {
-        const collection = db.collection(process.env.MONGODB_COLLECTION2);
-        
-        // Mettez à jour le document existant ou insérez un nouveau document s'il n'existe pas
-        const result = await collection.updateOne(
-            {}, // Critère de recherche (vide pour sélectionner le premier document)
-            { $set: paiementsAnnuel }, // Met à jour les champs avec les nouvelles valeurs
-            { upsert: true } // Crée un nouveau document si aucun document ne correspond
-        );
+        const collection = db.collection(process.env.MONGODB_COLLECTION);
 
-        res.redirect('/?success=true'); // Redirection avec un paramètre de succès
+        // Récupération des rendez-vous
+        const appointments = await collection.find({
+            "sceances.date": {
+                $gte: startDate.toISOString().split('T')[0],
+                $lte: endDate.toISOString().split('T')[0],
+            }
+        }).toArray();
+
+        // Traitement des rendez-vous récupérés
+        const formattedAppointments = appointments.flatMap(appointment => {
+            return appointment.sceances.map(sceance => {
+                const date = sceance.date;
+                const time = sceance.heure;
+
+                if (!date || !time) {
+                    console.error('Date or time is missing for appointment:', sceance);
+                    return null;
+                }
+
+                const appointmentDateTime = new Date(`${date}T${time}:00`);
+                if (isNaN(appointmentDateTime.getTime())) {
+                    console.error('Invalid date for appointment:', sceance);
+                    return null;
+                }
+
+                const localDate = appointmentDateTime.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+                const [dateString, timeString] = localDate.split(',');
+
+                return {
+                    nom: appointment.nom || 'Inconnu',
+                    prenom: appointment.prenom || 'Inconnu',
+                    date: dateString.trim(),
+                    heure: timeString.trim(),
+                    type: sceance.typeConsultation || 'Inconnu',
+                };
+            }).filter(Boolean);
+        });
+
+        res.json({ appointments: formattedAppointments });
     } catch (err) {
-        console.error("Erreur lors de l'ajout des paiements annuels:", err);
-        res.status(500).send("Erreur lors de l'ajout des paiements annuels");
+        console.error("Erreur lors de la récupération des rendez-vous :", err);
+        res.status(500).send('Erreur lors de la récupération des rendez-vous');
     }
 });
 
@@ -175,10 +353,6 @@ app.post('/nouveauPatient', async (req, res) => {
         res.status(500).send('Erreur lors de l\'ajout de la tâche');
     }
 });
-// app.get('/patients', (req, res) => {
-//     console.log("Route '/patients' atteinte");
-//     res.render('patients');
-// });
 app.get('/patients', async (req, res) => {
     try {
         const collection = db.collection(process.env.MONGODB_COLLECTION);
@@ -296,36 +470,6 @@ app.post('/votre-actionIII', async (req, res) => {
         res.render('index', { error: "Une erreur est survenue", patients: [] });
     }
 });
-// app.post('/ajouterPaiement', async (req, res) => {
-//     // Extraction des valeurs du corps de la requête
-//     const patientId = req.body.patientId || "lola"; // Utiliser une valeur par défaut pour le débogage
-//     const montant = req.body.montant || 100; // Utiliser une valeur par défaut pour le débogage
-
-//     const paiement = {
-//         patientId: patientId,
-//         montant: montant,
-//         datePaiement: req.body.datePaiement, // Assurez-vous que cette valeur est passée dans la requête
-//         modePaiement: req.body.modePaiement,
-//         statutPayement: req.body.statutPayement,
-//         commentaire: req.body.commentaire,
-//     };
-
-//     console.log("Ajout de paiement:", paiement); // Débogage
-
-//     try {
-//         const collection = db.collection(process.env.MONGODB_COLLECTION);
-        
-//         // Ajout du paiement dans la collection
-//         const result = await collection.insertOne(paiement);
-//         console.log("Paiement effectué:", result.insertedId); // Log du paiement effectué
-
-//         // Redirection ou réponse appropriée
-//         res.redirect('/comptabilite'); // Redirige vers la comptabilité après l'ajout
-//     } catch (error) {
-//         console.error("Erreur lors de l'insertion :", error);
-//         res.status(500).send("Erreur lors de l'ajout du paiement");
-//     }
-// });
 
 app.post('/paiement', async (req, res) => {
     const patientId = req.body.patientId
@@ -357,6 +501,66 @@ app.post('/paiement', async (req, res) => {
     } catch (error) {
         console.error("Erreur lors de l'ajout du paiement:", error);
         res.status(500).send("Erreur lors de l'ajout du paiement");
+    }
+});
+
+app.post('/ajoutRendezVous', async (req, res) => {
+    const patientId = req.body.nomPatientAjoutRendezVous
+
+    const sceance = {
+        date: req.body.dateJour,
+        heure: req.body.dateHeure, 
+        typeConsultation: req.body.typeConsultation,
+    };
+
+    console.log("Ajout de consultation:", sceance); // Débogage
+
+    try {
+        const collection = db.collection(process.env.MONGODB_COLLECTION);
+        
+        // Ajout du paiement au tableau `paiements` du patient correspondant
+        const result = await collection.updateOne(
+            { nom: patientId }, // Condition pour trouver le bon document
+            { $push: { sceances: sceance } } // Ajoute le paiement au tableau `paiements`
+        );
+        if (result.modifiedCount === 0) {
+            console.log("Aucun document modifié, assurez-vous que le patient existe.");
+            return res.status(404).send("Patient non trouvé.");
+        }
+        console.log("consultation ajoutée:", result);
+        res.redirect('/planning'); // Redirige vers la comptabilité après l'ajout
+    } catch (error) {
+        console.error("Erreur lors de l'ajout du rendez-vous:", error);
+        res.status(500).send("Erreur lors de l'ajout du rendez-vous");
+    }
+});
+
+app.post('/ajoutTachePerso', async (req, res) => {
+    const tache = {
+        tachePerso: req.body.tachePerso,
+        date: req.body.dateJourTachePerso,
+        heure: req.body.dateHeureTachePerso, 
+    };
+
+    console.log("Ajout de tâche perso:", tache); // Débogage
+
+    try {
+        const collection = db.collection(process.env.MONGODB_COLLECTION3);
+
+        // Essayer d'ajouter la tâche dans le tableau `taches`
+        const result = await collection.insertOne(tache);
+
+        // Vérifie le résultat de la mise à jour
+        if (result.modifiedCount === 0 && result.upsertedCount === 0) {
+            console.log("Aucun document modifié ou inséré.");
+            return res.status(404).send("Erreur lors de l'ajout de la tâche.");
+        }
+
+        console.log("Tâche ajoutée:", result);
+        res.redirect('/planning'); // Redirige vers la page souhaitée
+    } catch (error) {
+        console.error("Erreur lors de l'ajout de tâche:", error);
+        res.status(500).send("Erreur lors de l'ajout de la tâche");
     }
 });
 

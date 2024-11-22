@@ -3,10 +3,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
 }
 
 body {
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,16 +16,12 @@ body {
   color: #333; /* Couleur du texte */
   text-align: center;
 }
-
 textarea {
-  width: 300px; /* Largeur maximale */
-  max-width: 100%; /* S'adapte à l'écran */
-  height: auto;
-  min-height: 5vh;
-  resize: none; /* Pas de redimensionnement */
-  overflow-wrap: break-word; /* Permet de gérer les mots longs */
-  word-wrap: break-word; /* Compatibilité ancienne */
-  white-space: pre-wrap; /* Préserve les sauts de ligne tout en autorisant les retours automatiques */
+  width: 300px; /* Limite la largeur à 300 pixels */
+  max-width: 100%; /* Permet au textarea de s'adapter à l'écran tout en gardant la largeur max */
+  height: auto; /* Permet à la hauteur de s'adapter au contenu */
+  min-height: 5vh; /* Définissez une hauteur minimale si nécessaire */
+  resize: none; /* Permet de redimensionner verticalement uniquement */
 }
 
 /* Styles pour le header */
@@ -76,6 +72,9 @@ textarea {
   padding: 10px; /* Espacement interne */
   border: 1px solid #ccc; /* Bordure grise claire */
   border-radius: 4px; /* Coins arrondis pour les champs de saisie */
+  overflow-wrap: break-word; /* Permet de gérer les mots longs */
+  word-wrap: break-word; /* Compatibilité ancienne */
+  white-space: pre-wrap; /* Préserve les sauts de ligne tout en autorisant les retours automatiques */
 }
 .choix{
   margin-left: 1%;
@@ -97,7 +96,7 @@ textarea:focus {
   gap:10%;
 }
 button[type="submit"] {
-  margin-left: 10px; /* Ajustez selon vos besoins */
+
 }
 .ficheRenseignements{
   margin-bottom: 2%;
@@ -105,9 +104,10 @@ button[type="submit"] {
 
 /* Style du bouton */
 button {
+  margin-top: 10px;
   background-color: #2196F3; /* Couleur de fond du bouton */
   color: white; /* Couleur du texte du bouton */
-  padding: 10px 15px; /* Espacement interne du bouton */
+  padding: 10px; /* Espacement interne du bouton */
   border: none; /* Supprimer la bordure par défaut */
   border-radius: 4px; /* Coins arrondis */
   cursor: pointer; /* Changer le curseur lors du survol */
@@ -129,14 +129,17 @@ p {
   white-space: pre-wrap; /* Préserve les sauts de ligne tout en autorisant les retours automatiques */
 }
 #retourMenuPrincipal {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
   position: relative; 
   margin: auto;      
   margin-top: 1vh; 
   margin-bottom: 2vh;              
   padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
   border: none;
   border-radius: 5px;
-  font-family: 'Press Start 2P';
   background-color:rgb(81, 231, 17);
   color: #000000;
   font-size: 1.2rem;

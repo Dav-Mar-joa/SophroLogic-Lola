@@ -3,8 +3,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
+
 body {
     display: flex;
     flex-direction: column;
@@ -12,20 +12,16 @@ body {
     justify-content: center;
     min-height: 100vh;
     background-color: #f3f4f6;
-    /* background-color: #f6c5ea; */
+    font-family: 'Montserrat', sans-serif;
     color: #333;
     text-align: center;
-    /* background-image: url("images/backgroung.png");
-    background-size: contain; 
-    background-repeat: repeat;
-    opacity: 0.3; 
-    z-index: 3;  */
 }
 
 /* Header */
 header {
     margin-bottom: 20px;
 }
+
 header h1 {
     font-size: 2rem;
     color: #333;
@@ -35,11 +31,16 @@ header h1 {
 .buttons-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
     justify-content: center;
 }
+
 .button {
+    display: flex;               /* Active Flexbox */
+    justify-content: center;      /* Centre horizontalement */
+    align-items: center;          /* Centre verticalement */
     width: 200px;
+    height: 100px;                /* Hauteur ajustable */
     padding: 20px;
     border-radius: 8px;
     text-align: center;
@@ -49,6 +50,7 @@ header h1 {
     font-weight: bold;
     transition: transform 0.2s ease;
 }
+
 .button:hover {
     transform: scale(1.05);
 }
@@ -57,35 +59,44 @@ header h1 {
 .comptabilite {
     background-color: #4CAF50;
 }
+
 .planning {
     background-color: #2196F3;
 }
+
 .suivi {
     background-color: #FF9800;
 }
+
 .nouveauPatient {
     background-color: #ff00dd;
 }
+
 .boiteOutils {
     background-color: #ff0000;
-    margin-top: 20px;
-    max-width: 20%;
 }
+
 .patients {
     background-color: #00c8ff;
 }
 
+p {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    
+}
+
 /* Responsive Design */
 @media (min-width: 601px) {
-    /* En version PC, le bouton "Documents" occupe une ligne entière */
-    .button.boiteOutils {
-        width: 100%;
-    }
+    /* Styles spécifiques à la version PC */
 }
+
 @media (max-width: 600px) {
     .button {
         width: 75%;
     }
+    
     header h1 {
         font-size: 1.5rem;
     }

@@ -4,12 +4,12 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
     }
 
     /* Corps de page */
     body {
       background-color: #f4f4f9;
+      font-family: 'Montserrat', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -17,8 +17,11 @@
     }
     p {
       margin-top: 20px; /* Espacement au-dessus du paragraphe */
-      font-size: 1.2rem; /* Taille du texte du message */
+      font-size: 1rem; /* Taille du texte du message */
       font-weight: bold; /* Mettre le texte en gras */
+      overflow-wrap: break-word; /* Permet de gérer les mots longs */
+      word-wrap: break-word; /* Compatibilité ancienne */
+      white-space: pre-wrap; /* Préserve les sauts de ligne tout en autorisant les retours automatiques */
     }
 
     /* Navigation pour les semaines */
@@ -30,8 +33,10 @@
       margin: 20px 0;
     }
     .week-navigation button {
+      margin-bottom: 5%;
       padding: 10px 20px;
       font-size: 16px;
+      width: 15%;
       background-color: #007bff;
       color: white;
       border: none;
@@ -55,6 +60,7 @@
     /* Jours de la semaine */
     .day {
       background-color: white;
+      border: 1px solid rgb(178, 177, 177);
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       padding: 10px;
@@ -90,6 +96,7 @@
       padding: 8px;
       background-color: #e9ecef;
       border-radius: 5px;
+      border: solid 1px black;
     }
     .patient-item span {
       font-size: 14px;
@@ -102,7 +109,7 @@
     .patient-buttons button {
       font-size: 12px;
       padding: 5px 10px;
-      background-color: #6c757d;
+      background-color: #94b5d2;
       color: white;
       border: none;
       border-radius: 3px;
@@ -110,7 +117,7 @@
       transition: background-color 0.2s;
     }
     .patient-buttons button:hover {
-      background-color: #495057;
+      background-color: #e86a3c;
     }
 
     /* Bouton Ajouter */
@@ -130,20 +137,87 @@
       background-color: #218838;
     }
     #retourMenuPrincipal {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
         position: relative; 
         margin: auto;      
         margin-top: 1vh; 
         margin-bottom: 2vh;              
         padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
         border: none;
         border-radius: 5px;
-        font-family: 'Press Start 2P';
         background-color:rgb(81, 231, 17);
         color: #000000;
         font-size: 1.2rem;
         cursor: pointer;
         border: 3px solid #fff;
       }
+
+      /* Style de base pour le conteneur de formulaire */
+.form-container {
+  text-align: center;
+  width: 15%;
+  display: block; /* Par défaut, le formulaire est masqué */
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #f9f9f9; /* Fond clair pour le contraste */
+  border: 1px solid #ccc; /* Bordure fine et grise */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Légère ombre pour le relief */
+}
+
+/* Style des champs de formulaire */
+.form-container label {
+  display: block; /* Assure que le label soit sur une ligne distincte */
+  margin-bottom: 8px;
+  font-weight: bold; /* Rend le texte du label plus visible */
+  color: #333; /* Couleur sombre pour le label */
+}
+
+.form-container select,
+.form-container input {
+  text-align: center;
+  width: 100%; /* Occupe toute la largeur disponible */
+  padding: 8px; /* Ajoute du padding pour l'espace intérieur */
+  margin-bottom: 10px; /* Espace entre les éléments */
+  border: 1px solid #ccc; /* Bordure fine */
+  border-radius: 4px; /* Coins légèrement arrondis */
+  font-size: 16px; /* Taille de texte agréable à lire */
+}
+
+/* Style du bouton d'ajout */
+.form-container button[type="submit"] {
+  padding: 10px 15px; /* Espacement intérieur */
+  background-color: #0056b3;
+  color: white; /* Couleur du texte en blanc */
+  border: none; /* Pas de bordure */
+  border-radius: 4px; /* Coins arrondis */
+  cursor: pointer; /* Curseur pointer pour indiquer un clic */
+  font-size: 16px; /* Taille de texte */
+  transition: background-color 0.3s ease; /* Transition pour effet de survol */
+  margin: auto;
+}
+.form-container button[type="button"] {
+  padding: 10px 15px; /* Espacement intérieur */
+  background-color: #b3007a;
+  color: white; /* Couleur du texte en blanc */
+  border: none; /* Pas de bordure */
+  border-radius: 4px; /* Coins arrondis */
+  cursor: pointer; /* Curseur pointer pour indiquer un clic */
+  font-size: 16px; /* Taille de texte */
+  transition: background-color 0.3s ease; /* Transition pour effet de survol */
+  margin: auto;
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #45a049; /* Couleur légèrement plus sombre au survol */
+}
+.form-container button[type="button"]:hover {
+  background-color: #b30095; /* Couleur légèrement plus sombre au survol */
+  scale: 1.05;
+}
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -152,5 +226,11 @@
       }
       .patient-buttons button {
         padding: 4px 8px;
+      }
+      .week-navigation button {
+        width: 40%;
+      }
+      .form-container {
+        width:70%
       }
     }
